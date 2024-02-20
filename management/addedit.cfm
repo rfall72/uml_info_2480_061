@@ -1,8 +1,10 @@
 
-<cfset addEditFunctions.processForms(form)>
+
  
 <cftry>
     <cfset addEditFunctions = createObject("addedit") />
+    <!--- The call to the function needs to be after we create the addEditFunctions.Other wise we're calling something that doesn't exist :) --->
+    <cfset addEditFunctions.processForms(form)>
     <div class="row">
         <div id="main" class="col-9">
             <cfoutput> #mainForm()#</cfoutput>
