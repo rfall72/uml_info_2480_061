@@ -1,9 +1,8 @@
 
 component{
-
     function processForms(required struct formData){
         if(formData.keyExists("isbn13")) {
-           var qs = new query(datasource=application.dsource);
+            var qs = new query(datasource=application.dsource);
             qs.setSql("INSERT into books(ISBN13,title) VALUES(:isbn13,:title)");
             qs.addParam(
                 name="isbn13",
@@ -16,8 +15,12 @@ component{
                 value=formData.title
             );
             qs.execute();
-            }
+        }
     }
 
-    
+    function sideNavBooks(){
+        var ql = new query(datasource=application.dsource);
+            ql.setSql("SELECT * FROM books");
+            return ql.execute().getResult();
+    }
 }

@@ -1,5 +1,4 @@
 
-
  
 <cftry>
     <cfset addEditFunctions = createObject("addedit") />
@@ -28,8 +27,8 @@
             <label for="isbn13">ISBN13:</label>
             <input type="text" id="isbn13" name="isbn13" value="" placeholder="ISBN13" />
             
-            <label for=”title”>Book Title</label>
-            <input type=”text” id=”title” name=”title” value="" placeholder="Book Title" /> 
+            <label for="title">Book Title</label>
+            <input type=”text” id="title" name="title" value="" placeholder="Book Title" /> 
 
             <button type=”submit” class="btn btn-primary">Add Book</button>
         </form>
@@ -37,7 +36,17 @@
 </cffunction>
 
 <cffunction name="sideNav">
-           
+           <cfset allbooks = addEditFunctions.sideNavBooks()>
+               <div>
                    Book List
-               
-       </cffunction>
+               </div>
+               <cfoutput>
+                   <ul class="nav flex-column">
+                   <cfloop query="allbooks">
+                       <li class="nav-item">
+                           <a class="nav-link">#trim(title)#</a>
+                       </li>
+                   </cfloop>
+                   </ul>
+               </cfoutput>
+</cffunction>
