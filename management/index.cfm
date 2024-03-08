@@ -13,12 +13,17 @@ crossorigin="anonymous">
  crossorigin="anonymous">
 </script>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+
 </head>
 <body>
     <cfparam name="tool" default="addedit" />
 
     <div id="wrapper" class="container">
-        <div id="navarea"> NAV </div>
+        <div id="navarea">
+         <a href="#cgi.script_name#/?tool=addedit">Book Inventory</a>
+         <a href="#cgi.script_name#/?tool=createuuids">Create UUIDS</a>
+        </div>
         <div id="mainarea">
             <cfinclude template="#tool#.cfm" />
         </div>
