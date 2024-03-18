@@ -9,14 +9,23 @@
     <link href="../includes/css/mycss.css" rel="stylesheet"/>
 </head>
 <body>
+    <cfparam name="p" default="carousel"/>
+    <cfinclude template="stateinfo.cfm" />
+    <cfset bookstoreFunctions = createObject("bookstore") />
+
 <div id="wrapper" class="container">
     <cfinclude template="header.cfm" />  
     <div id="horizontalnav" class="row">
         <cfinclude template="horizontalnav.cfm" />
     </div>
+</br>
     <div id="maincontent" class="row">
-        <cfinclude template="carousel.cfm" />
-        <cfinclude template="genrenav.cfm" />
+        <section id="center" class="col-sm-9 order-last">
+            <cfinclude template="#p#.cfm" />
+        </section>
+        <section id="left" class="col-3 order-first">
+            <cfinclude template="genrenav.cfm" />
+        </section>
     </div>
     <cfinclude template="footer.cfm" />
 </div>
