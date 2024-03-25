@@ -27,6 +27,10 @@
 
     <cfset allPublishers = addEditFunctions.allPublishers()>
     <cfset bookDetails = addEditFunctions.bookDetails(book)>
+
+    <cfset allGenre = addEditFunctions.allGenres()>
+    <cfset bookGenre = addEditFunctions.bookGenres(book)>
+
     <cfoutput>
         <form action="#cgi.script_name#?tool=addedit&qterm=#qterm#" method="post" enctype="multipart/form-data">
             <div class="form-floating mb-3">
@@ -98,6 +102,19 @@
         </script>
     </div>     
 
+    <div class="form-floating mb-3">
+        <div>
+            <label for="genre">Genre</label>
+        </div>
+        <cfloop query="allGenre">
+        <input type="checkbox" id="genre#genreID#" name="genre" value="#genreID#"/>
+            #genreName# </br>
+        </cfloop>
+        <cfloop query="bookGenre">
+            <script>document.getElementById('genre#genreID#').checked=true;</script>
+        </cfloop>
+    </div>
+        
 
             <button type="submit" class="btn btn-primary" style="width:100%">Add Book</button>
         </form>

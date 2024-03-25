@@ -7,6 +7,9 @@ component{
                     formData.image = UploadBookCover();
                 }
 
+
+            
+
             var qs = new query(datasource=application.dsource);
             qs.setSql("
                 IF NOT EXISTS(SELECT * FROM books WHERE ISBN13=:ISBN13)
@@ -83,7 +86,17 @@ component{
             );
 
             qs.execute();
+
+            if(formData.keyExists("genre")){
+                deleteAllBookGenres(formData.ISBN13);
+
+                formData.genre.listToArray().each(function(item){
+                    insertGenre(item,formData.ISBN13);
+                });
+            }
         }
+
+
     }
 
         function sideNavBooks(qterm){
@@ -121,4 +134,50 @@ component{
         var imageData = fileUpload(expandPath("../images/"),"uploadImage","*","makeUnique");
         return imageData.serverFile;
     }
+
+    function deleteAllBookGenres(ISBN13){
+        var qd = new query(datasource=application.dsource);
+        qd.setSql("DELETE
+            FROM genreToBooks
+            WHERE ISBN13=:ISBN13
+        ");
+        qd.addParam(
+            name="ISBN13",
+            value=arguments.ISBN13
+        );
+        qd.execute();
+    }
+
+    function insertGenre(genreID,ISBN13){
+        var qi = new query(datasource=application.dsource);
+        qi.setSql(" INSERT into genreToBooks(ISBN13,genreID)
+                    VALUES (:ISBN13,:genreID);
+        ")
+        qi.addParam(
+            name="ISBN13",
+            value=arguments.ISBN13
+        );
+        qi.addParam(
+            name="genreID",
+            value=arguments.genreID
+        );
+        qi.execute();
+    }
+
+    function allGenres(){
+        var qg = new query(datasource=application.dsource);
+        qg.setSql("SELECT * FROM genres ORDER BY genreName");
+        return qg.execute().getResult();
+    }
+
+    function bookGenres(ISBN13){
+        var bg = new query(datasource=application.dsource);
+        bg.setSql("SELECT *
+                FROM genreToBooks
+                WHERE ISBN13=:ISBN13
+                ");
+        bg.addParam(name="ISBN13", value=arguments.ISBN13);
+        return bg.execute().getResult();
+    }
+
 }

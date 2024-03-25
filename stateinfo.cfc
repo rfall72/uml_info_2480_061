@@ -1,21 +1,25 @@
 component{
-    function obtainUser() {
+    function obtainUser(
+        isLoggedIn = false,
+        firstName= "",
+        lastName= "",
+        email="",
+        acctNumber="",
+        isAdmin=0
+    ) {
         return {
-
-        "isLoggedIn" = false,
-        "firstName"= "",
-        "lastName"= "",
-        "email"="",
-        "acctNumber"="",
-        "isAdmin"=0
-
-
+            isLoggedIn:arguments.isLoggedIn,
+            firstName:arguments.firstName,
+            lastName:arguments.lastName,
+            email:arguments.email,
+            acctNumber:arguments.acctNumber,
+            isAdmin:arguments.isAdmin
         };
     }
 
     function emailisUnique(required string email){
         var qs = new query(datasource=application.dsource);
-        qs.setSql("SELECT * FROM people WHERE email=:email");
+        qs.setSql("SELECT * FROM People WHERE email=:email");
         qs.addParam(name="email",value=arguments.email);
         return qs.execute().getResult().recordcount==0;
     }
@@ -39,7 +43,7 @@ component{
         try{
             var qs = new query(datasource=application.dsource);
             qs. setSql("INSERT into password(personID, password)
-            VAULES (:personID, :password) ");
+            VALUES (:personID, :password) ");
             qs.addParam(
                 name="personID",
                 value = arguments.id
@@ -63,7 +67,7 @@ component{
                         numeric isAdmin=0){
             var qs= new query(datasource=application.dsource);
             qs. setSql("INSERT into People(personID,firstName, lastName, email, isAdmin)
-            VAULES (:personID, :firstName, :lastName, :email, :isAdmin)");
+            VALUES (:personID, :firstName, :lastName, :email, :isAdmin)");
             qs.addParam(
                 name="personID",
                 value=arguments.id
@@ -100,6 +104,23 @@ component{
             qs.addParam(
                 name="password",
                 value=hash(form.loginpass,"SHA-512")
+            );
+            return qs.execute().getResult();
+    }
+
+    function logMeIn(username, password) {
+        var qs= new query(datasource=application.dsource);
+        qs. setSql("SELECT *
+                    FROM People
+                        INNER JOIN password on People.personID=password.personID
+                    WHERE People.email=:email AND password.password=:password");
+            qs.addParam(
+                name="email",
+                value=arguments.username
+            );
+            qs.addParam(
+                name="password",
+                value=hash(arguments.password,"SHA-512")
             );
             return qs.execute().getResult();
     }

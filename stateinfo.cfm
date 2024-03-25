@@ -16,10 +16,11 @@
     <cfif userData.recordcount == 1>
         <cfset session.user=stateFunctions.obtainUser(
             isLoggedIn=1,
-            firstName=userData.firstName,
-            lastName=userData.lastName,
-            email=userData.email,
-            isAdmin=userData.isAdmin
+            firstName=userData.firstName[1],
+            lastName=userData.lastName[1],
+            email=userData.email[1],
+            acctNumber=userData.personID[1],
+            isAdmin=userData.isAdmin[1]
         ) />
         <cfset p="carousel">
     <cfelse>

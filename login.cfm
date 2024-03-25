@@ -2,12 +2,7 @@
 <cfparam name="newAccountMessage" default="" />
 <cfparam name="LoginMessage" default="" />
 
-<!--
-<cfif form.keyExists("firstName")>
-    <cfset newAccountResult= stateFunctions.processNewAccount(form)/>
-    <cfset newAccountMessage = newAccountResult.message /> 
-</cfif> 
--->
+
 <script type="text/javascript">
     function validateNewAccount(){
         let originalPassword= document.getElementById('password').value;
@@ -34,6 +29,7 @@
 
 
 <cffunction name="newAccountForm">
+    <h2> Create New Account </h2>
     <cfoutput>   
 
         <div id="newAccountMessage">
@@ -83,6 +79,7 @@
 
 
 <cffunction name="loginForm">
+    <h2> Login </h2>
     <cfoutput> 
         <div id="LoginMessage">
             #LoginMessage#
@@ -90,12 +87,12 @@
         
         <form action="#cgi.script_name#?p=login" method="post" enctype="multipart/form-data">
             <div class="form-floating mb-3">
-                <input required type="loginemail" id="loginemail" name="loginemail" class="form-control" placeholder="login email" />
+                <input required type="email" id="loginemail" name="loginemail" class="form-control" placeholder="login email" />
                 <label for="loginemail">email address</label>
             </div>
 
             <div class="form-floating mb-3">
-                <input required type="loginpass" id="loginpass" name="loginpass" class="form-control" placeholder="Login password" />
+                <input required type="password" id="loginpass" name="loginpass" class="form-control" placeholder="Login password" />
                 <label for="loginpass">password</label>
             </div>
 
