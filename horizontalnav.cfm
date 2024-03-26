@@ -22,13 +22,18 @@
                         <a class="nav-link" href="#">Events</a>
                     </li>
 
-                    <cfif session.user.isAdmin>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#cgi.script_name#?p=management">Management Page</a>
-                    </li>
+            <cfoutput>
+                <cfif session.user.isAdmin>
+                        <li class="nav-item">
+                            <a class="nav-link" href="management/index.cfm" target="_blank">Management Page</a>
+                        </li>
                     </cfif>
+                </cfoutput>        
                     
                 </ul>
+
+                
+
                 <cfoutput>
                 <form class="d-flex" action="#cgi.script_name#?p=details" method="post">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchme">
@@ -36,21 +41,19 @@
                 </form>
                 
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        
+                    <li class="nav-item">                        
                             <cfif session.user.isLoggedIn>
-                                <li>
-                                    <a>Welcome #session.user.firstName#</a>
+                                <li class="nav-item">
+                                    <span class="nav-link">Welcome #session.user.firstName#</span>
                                 </li>
-                                <li>
-                                    <a href="#cgi.script_name#?p=logoff">Logout</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#cgi.script_name#?p=logoff">Logout</a>
                                 </li>
                             <cfelse>
-                                <li>
-                                    <a href="#cgi.script_name#?p=login">Login</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#cgi.script_name#?p=login">Login</a>
                                 </li>
                             </cfif>
-                        
                     </li>
                 </ul>
                </cfoutput>  
