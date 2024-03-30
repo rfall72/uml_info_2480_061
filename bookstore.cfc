@@ -46,5 +46,15 @@ component {
 
         }
     }
+    
+    function obtainArticle(contentID){
+        var bg = new query(datasource=application.dsource);
+        bg.setSql("SELECT *
+                FROM content
+                WHERE contentID=:contentID
+                ");
+        bg.addParam(name="contentID", value=contentID);
+        return bg.execute().getResult();
+        }
 
 }

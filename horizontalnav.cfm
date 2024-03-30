@@ -6,23 +6,24 @@
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            
+            <cfoutput>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#cgi.SCRIPT_NAME#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Store Information</a>
+                        <a class="nav-link" href="#cgi.SCRIPT_NAME#?p=content&contentID=2703A37C-165C-43BC-85DCC7840A37B7DA">Store Information</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Highlighted Favorites</a>
+                        <a class="nav-link" href="#cgi.SCRIPT_NAME#?p=content&contentID=DAE9D05F-5708-4F81-B16AC709B7977284">Highlighted Favorites</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Events</a>
+                        <a class="nav-link" href="#cgi.SCRIPT_NAME#?p=content&contentID=09649DE5-8265-4DAE-847CA8FC966A464B">Events</a>
                     </li>
 
-            <cfoutput>
+            
                 <cfif session.user.isAdmin>
                         <li class="nav-item">
                             <a class="nav-link" href="management/index.cfm" target="_blank">Management Page</a>

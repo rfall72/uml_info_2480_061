@@ -24,6 +24,7 @@ crossorigin="anonymous">
         <div id="navarea">
          <a href="#cgi.script_name#?tool=addedit">Book Inventory</a>
          <a href="#cgi.script_name#?tool=createuuids">Create UUIDS</a>
+         <a href="#cgi.script_name#?tool=content">Content</a>
         </div>
         <div id="mainarea">
             <cfinclude template="#tool#.cfm" />
